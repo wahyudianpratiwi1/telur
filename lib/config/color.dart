@@ -7,5 +7,6 @@ class ColorApp {
   static const bg2 = Color(0XFFF9F9F9);
   static const bg3 = Color(0XFFF0D0A1);
   static const graycolor = Color(0XFF898FAE);
-  static const yellowcolor = Color(0XFFE4A950);
+  static const yellowcolor = Color(0XFFF8C77D);
+  static const orangecolor = Color(0XFFE4A950);
 }

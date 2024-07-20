@@ -44,6 +44,10 @@ class SensorController extends GetxController {
     _databaseReference.update({"kipas": value});
   }
 
+  void updateStepper(int value) {
+    _databaseReference.update({"stepper": value});
+  }
+
   void updateCamera(int value) {
     _databaseReference.update({"camera": value}).then((_) {
       Get.snackbar(
@@ -59,7 +63,7 @@ class SensorController extends GetxController {
         'Error',
         'Failed to send $value to Firebase: $error',
         snackPosition: SnackPosition.BOTTOM,
-        duration: Duration(seconds: 2),
+        duration: const Duration(seconds: 2),
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );

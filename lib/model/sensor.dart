@@ -4,6 +4,7 @@ class Sensor {
   int? lampu;
   int? kipas;
   int? camera;
+  int? stepper;
   double? suhu;
 
   Sensor({
@@ -12,6 +13,7 @@ class Sensor {
     this.lampu,
     this.kipas,
     this.camera,
+    this.stepper,
     this.suhu,
   });
 
@@ -21,6 +23,7 @@ class Sensor {
       lampu: json["lampu"],
       kipas: json["kipas"],
       camera: json["camera"],
+      stepper: json["stepper"],
       suhu: json["suhu"]?.toDouble());
 
   Map<String, dynamic> toJson() => {
@@ -29,6 +32,7 @@ class Sensor {
         "lampu": lampu,
         "kipas": kipas,
         "camera": camera,
+        "stepper": stepper,
         "suhu": suhu,
       };
 }

@@ -4,9 +4,12 @@ import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monitoring_apps/config/color.dart';
 import 'package:monitoring_apps/firebase_options.dart';
+import 'package:monitoring_apps/page/awal_page.dart';
 import 'package:monitoring_apps/page/home_page.dart';
+import 'package:monitoring_apps/page/home_page1.dart';
+import 'package:monitoring_apps/page/info_page.dart';
 import 'package:monitoring_apps/page/intro_page.dart';
-import 'package:monitoring_apps/page/slider_page.dart';
+import 'package:monitoring_apps/page/pilihan_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,11 +29,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           textTheme: GoogleFonts.poppinsTextTheme(),
           primaryColor: ColorApp.primary,
-          colorScheme: const ColorScheme.light(
-              primary: ColorApp.primary, secondary: ColorApp.secondary)),
+          colorScheme: ColorScheme.light().copyWith(primary: Colors.black87)),
       routes: {
         '/home': (context) => const HomePage(),
-        '/slider': (context) => const SliderPage()
+        // '/slider': (context) => const SliderPage(),
+        '/pilihan': (context) => const PilihanPage(),
+        '/info': (context) => const InfoPage(),
+        '/page1': (context) => const HomePage1(),
+        '/page': (context) => const HomePage(),
+        '/awal': (context) => const AwalPage(),
       },
     );
   }

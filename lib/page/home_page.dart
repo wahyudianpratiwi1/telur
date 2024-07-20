@@ -15,6 +15,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    var screenSize = MediaQuery.of(context).size;
+    var screenWidth = screenSize.width;
+    var screenHeight = screenSize.height;
     return Scaffold(
         body: SafeArea(child: LayoutBuilder(builder: (context, constraints) {
       return SingleChildScrollView(
@@ -24,18 +27,29 @@ class _HomePageState extends State<HomePage> {
           ),
           child: Container(
             child: Stack(
-              alignment: Alignment.center,
+              // alignment: Alignment.center,
               children: [
                 Center(
                   child: Image(
-                    image: new AssetImage(AppAsset.bgSplash),
-                    width: 600,
+                    image: new AssetImage(AppAsset.bghome),
+                    width: screenWidth,
+                    height: screenHeight,
                     fit: BoxFit.fill,
                   ),
                 ),
+                // GestureDetector(
+                //   onTap: () {
+                //     Navigator.pushNamed(context, '/pilihan');
+                //   },
+                //   child: Image.asset(
+                //     AppAsset.back,
+                //     height: 47,
+                //     width: 64,
+                //   ),
+                // ),
                 Column(
                   children: [Widget1(), Widget2()],
-                )
+                ),
               ],
             ),
           ),
@@ -65,8 +79,6 @@ class _Widget1State extends State<Widget1> {
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: Container(
             height: 520,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15), color: ColorApp.bg2),
             child: Stack(children: [
               Padding(
                 padding: const EdgeInsets.only(top: 10),
@@ -76,48 +88,51 @@ class _Widget1State extends State<Widget1> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
+                        // Container(
+                        //   height: 67,
+                        //   width: 67,
+                        //   decoration: BoxDecoration(
+                        //       borderRadius: BorderRadius.circular(100),
+                        //       color: ColorApp.yellowcolor),
+                        //   child: const Padding(
+                        //     padding: EdgeInsets.all(8.0),
+                        //     child: Image(
+                        //       image: AssetImage(AppAsset.iconTemp),
+                        //     ),
+                        //   ),
+                        // ),
                         Container(
                           height: 67,
-                          width: 67,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: ColorApp.bg3),
-                          child: const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Image(
-                              image: AssetImage(AppAsset.iconTemp),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: 67,
-                          width: 237,
+                          width: 240,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
                               color: ColorApp.bg3),
                           child: const Center(
                               child: Text(
-                            "SUHU DAN KELEMBABAN",
+                            "MONITORING & KONTROL",
                             style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'JacquesFrancois'),
                           )),
                         ),
                       ],
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Container(
-                        height: 48,
-                        width: 108,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: ColorApp.bg3),
-                        child: const Center(
-                            child: Text(
-                          "SUHU",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.normal),
-                        )),
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 10),
+                      child: Center(
+                        child: Container(
+                          height: 30,
+                          width: 300,
+                          child: const Center(
+                              child: Text(
+                            "Suhu Inkubator",
+                            style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'JacquesFrancois'),
+                          )),
+                        ),
                       ),
                     ),
                     Obx(
@@ -137,34 +152,35 @@ class _Widget1State extends State<Widget1> {
                             center: Text(
                               '${sensorController.sensorData.value.suhu?.toStringAsFixed(1) ?? "0.0"}°C',
                               style: const TextStyle(
-                                  fontSize: 18.0,
+                                  fontSize: 20.0,
                                   fontWeight: FontWeight.bold,
-                                  color: ColorApp.yellowcolor),
+                                  color: ColorApp.primary),
                             ),
-                            progressColor: ColorApp.graycolor,
+                            progressColor: Colors.red,
                           ),
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Container(
-                        height: 48,
-                        width: 108,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                            color: ColorApp.bg3),
-                        child: const Center(
-                            child: Text(
-                          "KELEMBABAN",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.normal),
-                        )),
+                    Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(10.0),
+                        child: Container(
+                          height: 70,
+                          width: 300,
+                          child: const Center(
+                              child: Text(
+                            "Kelembaban\n  Inkubator",
+                            style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'JacquesFrancois'),
+                          )),
+                        ),
                       ),
                     ),
                     Obx(
                       () => Padding(
-                        padding: const EdgeInsets.all(15.0),
+                        padding: const EdgeInsets.only(top: 15.0),
                         child: Center(
                           child: CircularPercentIndicator(
                             animation: true,
@@ -181,11 +197,11 @@ class _Widget1State extends State<Widget1> {
                             center: Text(
                               '${sensorController.sensorData.value.kelembapan}%',
                               style: TextStyle(
-                                  fontSize: 18.0,
+                                  fontSize: 20.0,
                                   fontWeight: FontWeight.bold,
-                                  color: ColorApp.yellowcolor),
+                                  color: Colors.red),
                             ),
-                            progressColor: ColorApp.graycolor,
+                            progressColor: ColorApp.primary,
                           ),
                         ),
                       ),
@@ -220,89 +236,138 @@ class _Widget2State extends State<Widget2> {
               padding: const EdgeInsets.all(20.0),
               child: Container(
                 height: 306,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: ColorApp.bg2),
               ),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 40.0, left: 30),
-                  child: Container(
-                    height: 48,
-                    width: 108,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: ColorApp.bg3),
-                    child: const Center(
-                        child: Text(
-                      "HEATER",
-                      style: TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.normal),
-                    )),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 50.0, left: 0),
+                    child: Container(
+                      height: 40,
+                      width: 200,
+                      child: const Center(
+                          child: Text(
+                        "PEMANAS",
+                        style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'JacquesFrancois'),
+                      )),
+                    ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 209),
+                  padding: const EdgeInsets.only(right: 190),
                   child: Obx((() {
                     return Transform.scale(
-                      scale: 2,
+                      scale: 1.6,
                       child: SwitchListTile(
                         value: sensorController.sensorData.value.heater == 1,
                         onChanged: (bool value) {
                           int heaterValue = value ? 1 : 0;
                           sensorController.updateHeater(heaterValue);
                         },
-                        activeColor: ColorApp.yellowcolor,
-                        inactiveThumbColor: Colors.grey,
+                        activeColor: ColorApp.orangecolor,
+                        inactiveThumbColor: Colors.transparent,
                         inactiveTrackColor: Colors.grey,
                       ),
                     );
                   })),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 20.0, left: 30),
-                  child: Container(
-                    height: 48,
-                    width: 108,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: ColorApp.bg3),
-                    child: const Center(
-                        child: Text(
-                      "KIPAS",
-                      style: TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.normal),
-                    )),
+                Center(
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(top: 8.0, left: 0, right: 10),
+                    child: Container(
+                      height: 40,
+                      width: 108,
+                      child: const Center(
+                          child: Text(
+                        "KIPAS",
+                        style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'JacquesFrancois'),
+                      )),
+                    ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(right: 209),
+                  padding: const EdgeInsets.only(right: 190),
                   child: Obx((() {
                     return Transform.scale(
-                      scale: 2,
+                      scale: 1.6,
                       child: SwitchListTile(
                         value: sensorController.sensorData.value.kipas == 1,
                         onChanged: (bool value) {
                           int kipasValue = value ? 1 : 0;
                           sensorController.updateKipas(kipasValue);
                         },
-                        activeColor: ColorApp.yellowcolor,
-                        inactiveThumbColor: Colors.grey,
+                        activeColor: ColorApp.orangecolor,
+                        inactiveThumbColor: Colors.transparent,
                         inactiveTrackColor: Colors.grey,
                       ),
                     );
                   })),
                 ),
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/pilihan');
+                      },
+                      child: Image.asset(
+                        AppAsset.back,
+                        height: 47,
+                        width: 64,
+                      ),
+                    ),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 8.0, left: 40),
+                        child: Container(
+                          height: 40,
+                          width: 200,
+                          child: const Center(
+                              child: Text(
+                            "STEPPER",
+                            style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: 'JacquesFrancois'),
+                          )),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 50.0, top: 30),
-                  child: Text("By: Salsa & Azrah",
-                      style:
-                          TextStyle(fontSize: 16, fontStyle: FontStyle.italic)),
-                )
+                  padding: const EdgeInsets.only(right: 190),
+                  child: Obx((() {
+                    return Transform.scale(
+                      scale: 1.6,
+                      child: SwitchListTile(
+                        value: sensorController.sensorData.value.stepper == 1,
+                        onChanged: (bool value) {
+                          int stepperValue = value ? 1 : 0;
+                          sensorController.updateStepper(stepperValue);
+                        },
+                        activeColor: ColorApp.orangecolor,
+                        inactiveThumbColor: Colors.transparent,
+                        inactiveTrackColor: Colors.grey,
+                      ),
+                    );
+                  })),
+                ),
+                // const Padding(
+                //   padding: const EdgeInsets.only(left: 50.0, top: 30),
+                //   child: Text("By: Salsa & Azrah",
+                //       style:
+                //           TextStyle(fontSize: 16, fontStyle: FontStyle.italic)),
+                // )
               ],
             ),
           ],
