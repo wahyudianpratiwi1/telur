@@ -4,6 +4,7 @@ import 'package:get/route_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:monitoring_apps/config/color.dart';
 import 'package:monitoring_apps/firebase_options.dart';
+import 'package:monitoring_apps/helper/notification_helper.dart';
 import 'package:monitoring_apps/page/awal_page.dart';
 import 'package:monitoring_apps/page/home_page.dart';
 import 'package:monitoring_apps/page/home_page1.dart';
@@ -13,6 +14,7 @@ import 'package:monitoring_apps/page/pilihan_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await NotificationHelper.initialize();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

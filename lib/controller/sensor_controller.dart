@@ -1,6 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:monitoring_apps/helper/notification_helper.dart';
 import 'package:monitoring_apps/model/sensor.dart';
 
 class SensorController extends GetxController {
@@ -23,6 +24,7 @@ class SensorController extends GetxController {
         var sensor = Sensor.fromJson(data);
         sensorData.value = sensor;
         print("Sensor data: ${sensorData.value}");
+        _showLocalNotification(sensor);
       } else {
         sensorData.value = Sensor(
           heater: 0,
@@ -34,6 +36,24 @@ class SensorController extends GetxController {
         );
       }
     });
+  }
+
+  void _showLocalNotification(Sensor sensor) {
+    final heaterValue = sensor.heater;
+    final kelembapanValue = sensor.kelembapan;
+    if (heaterValue! < 36 || heaterValue > 40.2) {
+      NotificationHelper.showNotification(
+        title: 'Monitoring Inkubator',
+        body: 'Hallo, Cek Suhu Inkubatormu Yuk!!',
+      );
+    }
+
+    if (kelembapanValue! < 50 || kelembapanValue > 60) {
+      NotificationHelper.showNotification(
+        title: 'Monitoring Inkubator',
+        body: 'Hallo, Cek Kelembaban Inkubatormu Yuk!!',
+      );
+    }
   }
 
   void updateHeater(int value) {
